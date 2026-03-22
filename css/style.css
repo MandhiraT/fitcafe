@@ -231,6 +231,34 @@ section em {
     margin-top: 1.5rem;
 }
 
+/* Image Containers */
+.hero-image-container,
+.lifestyle-image-container,
+.ingredients-image-container {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.hero-image,
+.lifestyle-image,
+.ingredients-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Hero Image Specific */
+#headline .hero-image {
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+/* Ingredients Image Specific */
+.ingredients-image {
+    max-width: 600px;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
@@ -252,6 +280,13 @@ section em {
     .testimonial-card::before {
         font-size: 3rem;
         top: -15px;
+    }
+    
+    .hero-image,
+    .lifestyle-image,
+    .ingredients-image {
+        max-width: 100%;
+        margin: 1.5rem auto;
     }
 }
 
