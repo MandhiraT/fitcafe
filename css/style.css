@@ -1,0 +1,271 @@
+/* FitCafe Sales Page - CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f5f2;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* Headline Section */
+#headline {
+    text-align: center;
+    padding: 4rem 1.5rem 2rem;
+    background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+    color: white;
+    margin-bottom: 2rem;
+}
+
+#headline h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* Subheadline Section */
+#subheadline {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+#subheadline h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #5D4037;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* General Sections */
+section:not(#headline):not(#subheadline) {
+    margin-bottom: 3rem;
+    background: white;
+    padding: 2.5rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+section h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #5D4037;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+section p {
+    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+    color: #4E342E;
+}
+
+section em {
+    font-style: italic;
+    color: #8B4513;
+}
+
+/* Ingredient Cards */
+.ingredient-card {
+    background: #f9f5f0;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #8B4513;
+    border-radius: 8px;
+}
+
+.ingredient-card h3 {
+    font-size: 1.3rem;
+    color: #8B4513;
+    margin-bottom: 0.8rem;
+}
+
+.ingredients-note {
+    font-weight: 600;
+    text-align: center;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: #e8e0d5;
+    border-radius: 8px;
+}
+
+/* Benefits List */
+.benefits-list {
+    list-style: none;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.benefits-list li {
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    background: #f9f5f0;
+    border-radius: 8px;
+    border-left: 4px solid #8B4513;
+}
+
+.benefits-list li strong {
+    color: #5D4037;
+}
+
+/* Testimonials */
+.testimonial-card {
+    background: #f9f5f0;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    position: relative;
+}
+
+.testimonial-card::before {
+    content: """;
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    font-size: 4rem;
+    color: #d7ccc8;
+    font-family: serif;
+    line-height: 1;
+}
+
+.testimonial-card blockquote {
+    font-style: italic;
+    margin-bottom: 1rem;
+    color: #4E342E;
+}
+
+.testimonial-card cite {
+    display: block;
+    text-align: right;
+    font-weight: 600;
+    color: #8B4513;
+}
+
+.social-proof-note {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-style: italic;
+    color: #795548;
+}
+
+/* Guarantee Section */
+#guarantee {
+    background: linear-gradient(135deg, #5D4037 0%, #8B4513 100%);
+    color: white;
+    text-align: center;
+}
+
+#guarantee h2 {
+    color: white;
+}
+
+.guarantee-box {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.guarantee-badge {
+    background: #FFD700;
+    color: #5D4037;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+#guarantee p {
+    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+}
+
+#guarantee strong {
+    color: #FFD700;
+}
+
+/* CTA Section */
+#cta {
+    text-align: center;
+    background: white;
+    padding: 3rem 1.5rem;
+}
+
+.cta-button {
+    display: inline-block;
+    background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+    color: white;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 2rem 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+}
+
+.cta-subtext {
+    color: #795548;
+    font-size: 0.9rem;
+    margin: 1rem 0;
+}
+
+.cta-closing {
+    font-size: 1.1rem;
+    color: #5D4037;
+    margin-top: 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem 1rem;
+    }
+    
+    #headline h1 {
+        font-size: 2rem;
+    }
+    
+    #subheadline h2 {
+        font-size: 1.2rem;
+    }
+    
+    section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .testimonial-card::before {
+        font-size: 3rem;
+        top: -15px;
+    }
+}
+
+@media (max-width: 480px) {
+    #headline {
+        padding: 3rem 1rem 1.5rem;
+    }
+    
+    #headline h1 {
+        font-size: 1.8rem;
+    }
+    
+    .cta-button {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+    }
+}
