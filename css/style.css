@@ -250,8 +250,19 @@ section em {
 
 /* Hero Image Specific */
 #headline .hero-image {
-    max-width: 800px;
+    max-width: 100%;
+    width: auto;
+    height: auto;
     margin: 2rem auto;
+}
+
+/* Headline Section Adjustments */
+#headline {
+    padding: 2rem 1.5rem 1rem;
+}
+
+#headline h1 {
+    margin-bottom: 1rem;
 }
 
 /* Ingredients Image Specific */
