@@ -264,18 +264,38 @@
     <script>
     // Handle subscription - submit to Listmonk iframe and show success modal
     function handleSubscribe(e) {
-        const button = e.target.querySelector('button[type="submit"]');
+        e.preventDefault();
+        
+        const form = e.target;
+        const button = form.querySelector('button[type="submit"]');
         const originalText = button.textContent;
         
         // Show loading state
         button.textContent = 'Subscribing...';
         button.disabled = true;
         
-        // Wait for form to submit to iframe, then show success modal
+        // Create hidden iframe if not exists
+        let iframe = document.getElementsByName('listmonk-iframe')[0];
+        if (!iframe) {
+            iframe = document.createElement('iframe');
+            iframe.name = 'listmonk-iframe';
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+        }
+        
+        // Submit form to iframe
+        form.target = 'listmonk-iframe';
+        form.action = 'https://listmonk.thequietself.com/subscription/form';
+        form.method = 'POST';
+        
+        // Submit
+        form.submit();
+        
+        // Wait 2 seconds then show modal
         setTimeout(function() {
-            // Show success modal
+            // Show success modal using setAttribute (more reliable)
             const modal = document.getElementById('success-modal');
-            modal.style.display = 'flex';
+            modal.setAttribute('style', 'display: flex !important; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(192, 86, 33, 0.95); z-index: 999999; justify-content: center; align-items: center;');
             
             // Countdown timer
             let seconds = 5;
@@ -283,7 +303,7 @@
             
             const countdownInterval = setInterval(function() {
                 seconds--;
-                countdownEl.textContent = seconds;
+                if (countdownEl) countdownEl.textContent = seconds;
                 
                 if (seconds <= 0) {
                     clearInterval(countdownInterval);
@@ -291,11 +311,9 @@
                     window.location.href = 'https://fitcafecoffee.com?subscribed=true';
                 }
             }, 1000);
-            
-        }, 2000); // Wait 2 seconds for Listmonk to process
+        }, 2000);
         
-        // Form will submit to iframe automatically (target="listmonk-iframe")
-        return true;
+        return false;
     }
     </script>
 </body>
