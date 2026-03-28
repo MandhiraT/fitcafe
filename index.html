@@ -313,39 +313,5 @@
             }, 1000);
         }, 2000);
         
-        return false;
-    }
-    </script>
-</body>
-</html>
-Disclaimer:</strong> Individual results may vary. FitCafe is designed to complement a healthy lifestyle that includes balanced nutrition and regular physical activity.</p>
-        <p class="footer-copyright">&copy; 2026 FitCafe. All rights reserved.</p>
-    </footer>
-
-    <script src="js/script.js"></script>
-    <script>
-    // Handle subscription - submit to Listmonk iframe and redirect after delay
-    function handleSubscribe(e) {
-        const button = e.target.querySelector('button[type="submit"]');
-        const originalText = button.textContent;
-        
-        // Show loading state
-        button.textContent = 'Subscribing...';
-        button.disabled = true;
-        
-        // Wait for iframe to load (Listmonk processes the form)
-        // Then redirect after 3 seconds (enough time for Listmonk to send email)
-        const iframe = document.getElementsByName('listmonk-iframe')[0];
-        
-        // Set timeout to redirect after 3 seconds
-        setTimeout(function() {
-            console.log('Redirecting after successful subscription');
-            window.location.href = 'https://fitcafecoffee.com?subscribed=true';
-        }, 3000);
-        
-        // Form will submit to iframe automatically (target="listmonk-iframe")
-        return true;
-    }
-    </script>
 </body>
 </html>
