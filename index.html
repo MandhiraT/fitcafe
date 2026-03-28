@@ -194,10 +194,13 @@
         <h2>Get Your Free 5-Minute Morning Reset Guide</h2>
         <p class="optin-subtitle">Discover simple, science-backed strategies for supporting your metabolism, balancing energy, and reducing cravings — starting tomorrow morning.</p>
         
-        <form id="optin-form" class="optin-form">
-            <input type="hidden" id="optin-list" value="ab51b15c-4ecb-417e-911c-9f49fe683578">
-            <input type="text" id="optin-name" placeholder="Your first name" required>
-            <input type="email" id="optin-email" placeholder="Your best email" required>
+        <!-- Hidden iframe to receive Listmonk response -->
+        <iframe name="listmonk-iframe" style="display:none;"></iframe>
+        
+        <form id="optin-form" class="optin-form" action="https://listmonk.thequietself.com/subscription/form" method="POST" target="listmonk-iframe" onsubmit="handleSubscribe(event)">
+            <input type="hidden" name="l" value="ab51b15c-4ecb-417e-911c-9f49fe683578">
+            <input type="text" name="name" id="optin-name" placeholder="Your first name" required>
+            <input type="email" name="email" id="optin-email" placeholder="Your best email" required>
             <button type="submit" class="cta-button">Send Me the Free Guide →</button>
             <p class="privacy-text">🔒 We respect your privacy. Your information is never shared or sold. Unsubscribe anytime with one click.</p>
         </form>
@@ -239,13 +242,8 @@
 
     <script src="js/script.js"></script>
     <script>
-    // Handle subscription - submit to Listmonk and redirect
-    document.getElementById('optin-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const name = document.getElementById('optin-name').value;
-        const email = document.getElementById('optin-email').value;
-        const listId = document.getElementById('optin-list').value;
+    // Handle subscription - submit to Listmonk iframe and redirect after delay
+    function handleSubscribe(e) {
         const button = e.target.querySelector('button[type="submit"]');
         const originalText = button.textContent;
         
@@ -253,34 +251,19 @@
         button.textContent = 'Subscribing...';
         button.disabled = true;
         
-        // Submit to Listmonk via fetch with no-cors
-        fetch('https://listmonk.thequietself.com/subscription/form', {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams({
-                l: listId,
-                name: name,
-                email: email
-            })
-        })
-        .then(function() {
-            console.log('Subscription submitted');
-            // Redirect after 1 second
-            setTimeout(function() {
-                window.location.href = 'https://fitcafecoffee.com?subscribed=true';
-            }, 1000);
-        })
-        .catch(function(error) {
-            console.log('Subscription submitted (or network error - redirecting anyway)');
-            // Even on error, redirect (no-cors may cause false errors)
-            setTimeout(function() {
-                window.location.href = 'https://fitcafecoffee.com?subscribed=true';
-            }, 1000);
-        });
-    });
+        // Wait for iframe to load (Listmonk processes the form)
+        // Then redirect after 3 seconds (enough time for Listmonk to send email)
+        const iframe = document.getElementsByName('listmonk-iframe')[0];
+        
+        // Set timeout to redirect after 3 seconds
+        setTimeout(function() {
+            console.log('Redirecting after successful subscription');
+            window.location.href = 'https://fitcafecoffee.com?subscribed=true';
+        }, 3000);
+        
+        // Form will submit to iframe automatically (target="listmonk-iframe")
+        return true;
+    }
     </script>
 </body>
 </html>
