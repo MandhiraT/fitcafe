@@ -585,6 +585,31 @@ footer {
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
+/* Product Showcase - Special Handling */
+.product-showcase {
+    position: relative;
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+.product-showcase .product-hero-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-height: 600px;
+}
+
+@media (max-width: 768px) {
+    .product-showcase {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+    
+    .product-showcase .product-hero-image {
+        max-height: 400px;
+    }
+}
+
 .product-badge {
     background: linear-gradient(135deg, #F6E05E 0%, #F6AD55 100%);
     color: #744210;
