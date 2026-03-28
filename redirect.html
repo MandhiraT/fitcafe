@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribed Successfully - FitCafe Coffee</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta http-equiv="refresh" content="2;url=https://fitcafecoffee.com?subscribed=true">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #C05621 0%, #DD6B20 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 500px;
+            padding: 40px 20px;
+        }
+        
+        .icon {
+            font-size: 80px;
+            margin-bottom: 30px;
+            animation: bounce 1s ease infinite;
+        }
+        
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            font-size: 18px;
+            margin-bottom: 15px;
+            opacity: 0.95;
+        }
+        
+        .redirect-text {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-top: 30px;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 30px auto 0;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .manual-link {
+            margin-top: 30px;
+            display: inline-block;
+            color: white;
+            text-decoration: underline;
+            opacity: 0.8;
+        }
+        
+        .manual-link:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">✅</div>
+        <h1>Subscribed Successfully!</h1>
+        <p>Thank you for subscribing to FitCafe Coffee.</p>
+        <p class="redirect-text">Redirecting you back to FitCafe...</p>
+        <div class="spinner"></div>
+        <a href="https://fitcafecoffee.com?subscribed=true" class="manual-link">Click here if not redirected</a>
+    </div>
+    
+    <script>
+        // Redirect after 2 seconds
+        setTimeout(function() {
+            window.location.href = 'https://fitcafecoffee.com?subscribed=true';
+        }, 2000);
+    </script>
+</body>
+</html>
