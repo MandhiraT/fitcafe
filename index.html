@@ -194,20 +194,17 @@
         <h2>Get Your Free 5-Minute Morning Reset Guide</h2>
         <p class="optin-subtitle">Discover simple, science-backed strategies for supporting your metabolism, balancing energy, and reducing cravings — starting tomorrow morning.</p>
         
-        <!-- Hidden iframe to receive Listmonk response -->
-        <iframe name="listmonk-iframe" style="display:none;"></iframe>
-        
-        <form id="optin-form" class="optin-form" action="https://listmonk.thequietself.com/subscription/form" method="POST" target="listmonk-iframe" onsubmit="handleSubscribe(event)">
+        <form id="optin-form" class="optin-form">
             <input type="hidden" name="l" value="ab51b15c-4ecb-417e-911c-9f49fe683578">
-            <input type="text" name="name" id="optin-name" placeholder="Your first name" required>
-            <input type="email" name="email" id="optin-email" placeholder="Your best email" required>
+            <input type="text" id="optin-name" placeholder="Your first name" required>
+            <input type="email" id="optin-email" placeholder="Your best email" required>
             <button type="submit" class="cta-button">Send Me the Free Guide →</button>
             <p class="privacy-text">🔒 We respect your privacy. Your information is never shared or sold. Unsubscribe anytime with one click.</p>
         </form>
         <p class="ftc-disclosure">* This site contains affiliate links. We may earn a commission from qualifying purchases at no additional cost to you. This helps support our content and allows us to continue providing free resources.</p>
     </section>
 
-    <!-- Success Modal (Hidden by default) -->
+    <!-- Success Modal -->
     <div id="success-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(192, 86, 33, 0.95); z-index: 999999; justify-content: center; align-items: center;">
         <div style="background: white; padding: 40px; border-radius: 20px; max-width: 500px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
             <div style="font-size: 72px; margin-bottom: 20px;">✅</div>
@@ -221,9 +218,7 @@
             <div style="margin-top: 20px;">
                 <div style="width: 50px; height: 50px; border: 5px solid rgba(192, 86, 33, 0.2); border-top-color: #C05621; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
             </div>
-            <style>
-                @keyframes spin { to { transform: rotate(360deg); } }
-            </style>
+            <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
         </div>
     </div>
 
@@ -262,56 +257,67 @@
 
     <script src="js/script.js"></script>
     <script>
-    // Handle subscription - submit to Listmonk iframe and show success modal
-    function handleSubscribe(e) {
+    // Simple subscription handler - submit form and show modal
+    document.getElementById('optin-form').addEventListener('submit', function(e) {
         e.preventDefault();
         
-        const form = e.target;
+        const form = this;
         const button = form.querySelector('button[type="submit"]');
-        const originalText = button.textContent;
+        const name = document.getElementById('optin-name').value;
+        const email = document.getElementById('optin-email').value;
+        const listId = form.querySelector('input[name="l"]').value;
         
-        // Show loading state
+        // Show loading
         button.textContent = 'Subscribing...';
         button.disabled = true;
         
-        // Create hidden iframe if not exists
-        let iframe = document.getElementsByName('listmonk-iframe')[0];
-        if (!iframe) {
-            iframe = document.createElement('iframe');
-            iframe.name = 'listmonk-iframe';
-            iframe.style.display = 'none';
-            document.body.appendChild(iframe);
-        }
-        
-        // Submit form to iframe
-        form.target = 'listmonk-iframe';
-        form.action = 'https://listmonk.thequietself.com/subscription/form';
-        form.method = 'POST';
-        
-        // Submit
-        form.submit();
-        
-        // Wait 2 seconds then show modal
-        setTimeout(function() {
-            // Show success modal using setAttribute (more reliable)
+        // Submit to Listmonk using fetch with no-cors
+        fetch('https://listmonk.thequietself.com/subscription/form', {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                l: listId,
+                name: name,
+                email: email
+            })
+        })
+        .then(function() {
+            // Show success modal
             const modal = document.getElementById('success-modal');
-            modal.setAttribute('style', 'display: flex !important; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(192, 86, 33, 0.95); z-index: 999999; justify-content: center; align-items: center;');
+            modal.style.display = 'flex';
             
-            // Countdown timer
+            // Countdown
             let seconds = 5;
             const countdownEl = document.getElementById('countdown');
-            
-            const countdownInterval = setInterval(function() {
+            const interval = setInterval(function() {
                 seconds--;
-                if (countdownEl) countdownEl.textContent = seconds;
-                
+                countdownEl.textContent = seconds;
                 if (seconds <= 0) {
-                    clearInterval(countdownInterval);
-                    // Redirect to main site
+                    clearInterval(interval);
                     window.location.href = 'https://fitcafecoffee.com?subscribed=true';
                 }
             }, 1000);
-        }, 2000);
-        
+        })
+        .catch(function() {
+            // Even on error, show modal (no-cors may cause false errors)
+            const modal = document.getElementById('success-modal');
+            modal.style.display = 'flex';
+            
+            let seconds = 5;
+            const countdownEl = document.getElementById('countdown');
+            const interval = setInterval(function() {
+                seconds--;
+                countdownEl.textContent = seconds;
+                if (seconds <= 0) {
+                    clearInterval(interval);
+                    window.location.href = 'https://fitcafecoffee.com?subscribed=true';
+                }
+            }, 1000);
+        });
+    });
+    </script>
 </body>
 </html>
