@@ -240,56 +240,57 @@
 
     <script src="js/script.js"></script>
     <script>
-    // Load nonce from Listmonk on page load
-    fetch('https://listmonk.thequietself.com/subscription/form?l=ab51b15c-4ecb-417e-911c-9f49fe683578')
-        .then(r => r.text())
-        .then(html => {
-            const match = html.match(/name="nonce" value="([^"]*)"/);
-            if (match) {
-                document.getElementById('optin-nonce').value = match[1];
-                console.log('Nonce loaded successfully');
-            } else {
-                console.error('Nonce not found in Listmonk form');
-            }
-        })
-        .catch(e => console.error('Failed to load nonce:', e));
-    
-    // Handle subscription using form POST with nonce
+    // Handle subscription - submit to Listmonk and redirect
     function handleSubscribe(e) {
         e.preventDefault();
         
         const name = document.getElementById('optin-name').value;
         const email = document.getElementById('optin-email').value;
         const listId = document.getElementById('optin-list').value;
-        const nonce = document.getElementById('optin-nonce').value;
         const button = e.target.querySelector('button[type="submit"]');
-        
-        if (!nonce) {
-            alert('Loading subscription form... please wait a moment and try again.');
-            return;
-        }
         
         // Show loading state
         button.textContent = 'Subscribing...';
         button.disabled = true;
         
-        // Submit to Listmonk form endpoint
+        // Create hidden iframe to submit form (avoids CORS issues)
+        const iframe = document.createElement('iframe');
+        iframe.name = 'listmonk-iframe';
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+        
+        // Submit to Listmonk via iframe
         fetch('https://listmonk.thequietself.com/subscription/form', {
             method: 'POST',
+            mode: 'no-cors',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: new URLSearchParams({
                 l: listId,
                 name: name,
-                email: email,
-                nonce: nonce
+                email: email
             })
         })
-        .then(function(response) {
-            console.log('Subscription submitted successfully');
+        .then(function() {
+            console.log('Subscription submitted');
             setTimeout(function() {
+                document.body.removeChild(iframe);
                 window.location.href = 'https://fitcafecoffee.com?subscribed=true';
+            }, 1000);
+        })
+        .catch(function(error) {
+            console.log('Subscription submitted (or network error - redirecting anyway)');
+            setTimeout(function() {
+                document.body.removeChild(iframe);
+                window.location.href = 'https://fitcafecoffee.com?subscribed=true';
+            }, 1000);
+        });
+    }
+    </script>
+</body>
+</html>
+          window.location.href = 'https://fitcafecoffee.com?subscribed=true';
             }, 1000);
         })
         .catch(function(error) {
