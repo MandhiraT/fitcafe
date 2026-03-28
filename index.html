@@ -242,31 +242,44 @@
 
     <script src="js/script.js"></script>
     <script>
-    // Handle subscription redirect using iframe method
+    // Handle subscription using Listmonk API
     function handleSubscribe(e) {
         e.preventDefault();
-        const form = e.target;
-        const button = form.querySelector('button[type="submit"]');
-        const originalText = button.textContent;
+        
+        const name = document.getElementById('optin-name').value;
+        const email = document.getElementById('optin-email').value;
+        const button = e.target.querySelector('button[type="submit"]');
         
         // Show loading state
         button.textContent = 'Subscribing...';
         button.disabled = true;
         
-        // Create hidden iframe
-        const iframe = document.createElement('iframe');
-        iframe.name = 'listmonk-iframe';
-        iframe.style.display = 'none';
-        document.body.appendChild(iframe);
-        
-        // Submit form to iframe
-        form.submit();
-        
-        // Redirect after 2 seconds (regardless of iframe response)
-        setTimeout(function() {
-            window.location.href = 'https://fitcafecoffee.com?subscribed=true';
-            document.body.removeChild(iframe);
-        }, 2000);
+        // Submit to Listmonk API
+        fetch('https://listmonk.thequietself.com/api/public/subscription', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+                name: name,
+                list_uuids: ['ab51b15c-4ecb-417e-911c-9f49fe683578']
+            })
+        })
+        .then(function(response) {
+            // Success or error - redirect anyway (double opt-in required)
+            console.log('Subscription submitted');
+            setTimeout(function() {
+                window.location.href = 'https://fitcafecoffee.com?subscribed=true';
+            }, 1000);
+        })
+        .catch(function(error) {
+            // Even on network error, redirect (CORS may cause false errors)
+            console.log('Subscription submitted (or network error)');
+            setTimeout(function() {
+                window.location.href = 'https://fitcafecoffee.com?subscribed=true';
+            }, 1000);
+        });
     }
     </script>
 </body>
