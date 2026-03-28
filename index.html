@@ -207,6 +207,26 @@
         <p class="ftc-disclosure">* This site contains affiliate links. We may earn a commission from qualifying purchases at no additional cost to you. This helps support our content and allows us to continue providing free resources.</p>
     </section>
 
+    <!-- Success Modal (Hidden by default) -->
+    <div id="success-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(192, 86, 33, 0.95); z-index: 999999; justify-content: center; align-items: center;">
+        <div style="background: white; padding: 40px; border-radius: 20px; max-width: 500px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+            <div style="font-size: 72px; margin-bottom: 20px;">✅</div>
+            <h2 style="color: #C05621; font-size: 32px; font-weight: 700; margin-bottom: 15px;">Subscription Successful!</h2>
+            <p style="font-size: 18px; color: #4A5568; margin-bottom: 30px; line-height: 1.6;">Thank you for subscribing to FitCafe Coffee.</p>
+            <div style="background: #FFF5F0; padding: 20px; border-radius: 10px; margin-bottom: 30px;">
+                <p style="font-size: 16px; color: #C05621; font-weight: 600; margin: 0;">📧 Please check your email to confirm your subscription.</p>
+                <p style="font-size: 14px; color: #718096; margin: 10px 0 0 0;">Don't forget to check your spam folder!</p>
+            </div>
+            <p style="font-size: 14px; color: #A0AEC0;">Redirecting you back in <span id="countdown">5</span> seconds...</p>
+            <div style="margin-top: 20px;">
+                <div style="width: 50px; height: 50px; border: 5px solid rgba(192, 86, 33, 0.2); border-top-color: #C05621; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+            </div>
+            <style>
+                @keyframes spin { to { transform: rotate(360deg); } }
+            </style>
+        </div>
+    </div>
+
     <!-- SECTION 10: CTA -->
     <section id="cta" class="container">
         <h2>Your Morning Ritual, Elevated</h2>
