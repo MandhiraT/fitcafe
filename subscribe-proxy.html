@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing Subscription - FitCafe Coffee</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #C05621 0%, #DD6B20 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 500px;
+            padding: 40px 20px;
+        }
+        
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 30px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        p {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="spinner"></div>
+        <h1>Processing Your Subscription...</h1>
+        <p>Please wait while we confirm your subscription.</p>
+    </div>
+    
+    <script>
+        // Get form data from parent window (if opened as popup)
+        // Or submit directly
+        (function() {
+            // Create hidden form to submit to Listmonk
+            const form = document.createElement('form');
+            form.action = 'https://listmonk.thequietself.com/subscription/form';
+            form.method = 'POST';
+            form.style.display = 'none';
+            
+            // Get all URL parameters
+            const params = new URLSearchParams(window.location.search);
+            
+            // Add list ID
+            const listInput = document.createElement('input');
+            listInput.type = 'hidden';
+            listInput.name = 'l';
+            listInput.value = 'ab51b15c-4ecb-417e-911c-9f49fe683578';
+            form.appendChild(listInput);
+            
+            // Add name if provided
+            const name = params.get('name');
+            if (name) {
+                const nameInput = document.createElement('input');
+                nameInput.type = 'hidden';
+                nameInput.name = 'name';
+                nameInput.value = name;
+                form.appendChild(nameInput);
+            }
+            
+            // Add email if provided
+            const email = params.get('email');
+            if (email) {
+                const emailInput = document.createElement('input');
+                emailInput.type = 'hidden';
+                emailInput.name = 'email';
+                emailInput.value = email;
+                form.appendChild(emailInput);
+            }
+            
+            document.body.appendChild(form);
+            
+            // Submit to Listmonk
+            form.submit();
+            
+            // Redirect back to main site after 3 seconds (regardless of Listmonk response)
+            setTimeout(function() {
+                window.location.href = 'https://fitcafecoffee.com?subscribed=true';
+            }, 3000);
+        })();
+    </script>
+</body>
+</html>
