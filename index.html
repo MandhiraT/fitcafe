@@ -44,7 +44,7 @@
         <h1>What If Your Morning Coffee Could Support Your Wellness Goals?</h1>
         <div class="hero-image-container">
             <div class="product-showcase">
-                <img src="assets/hero-product-real.jpg?v=20260328" alt="FitCafe premium wellness coffee pouch" class="product-hero-image">
+                <img src="assets/hero-product-real.jpg" alt="FitCafe premium wellness coffee pouch" class="product-hero-image">
                 <div class="product-overlay">
                     <span class="product-badge">Premium Wellness Coffee</span>
                 </div>
@@ -66,7 +66,7 @@
         <p>It's not about willpower. It's about finding small, sustainable changes that work with your actual life — not against it.</p>
 
         <div class="lifestyle-image-container">
-            <img src="assets/morning-ritual.jpg?v=20260328" alt="Woman enjoying morning coffee ritual for weight loss" class="lifestyle-image">
+            <img src="assets/morning-ritual.jpg" alt="Woman enjoying morning coffee ritual for weight loss" class="lifestyle-image">
         </div>
 
         <p>That's exactly the place a lot of FitCafe drinkers were before they found us. Not looking for a miracle. Just looking for something that works <em>with</em> their life instead of asking more of it. A simple swap they could actually stick to. That's the idea FitCafe was built on.</p>
@@ -88,7 +88,7 @@
         <h2>What's Inside — And Why We Chose It</h2>
 
         <div class="ingredients-image-container">
-            <img src="assets/ingredients-visual.jpg?v=20260328" alt="FitCafe natural ingredients: green coffee beans, green tea, L-Theanine, chromium, L-Carnitine, Garcinia Cambogia" class="ingredients-image">
+            <img src="assets/ingredients-visual.jpg" alt="FitCafe natural ingredients: green coffee beans, green tea, L-Theanine, chromium, L-Carnitine, Garcinia Cambogia" class="ingredients-image">
         </div>
 
         <p>We believe in full transparency. Here's what goes into every cup of FitCafe, and what each ingredient actually does:</p>
@@ -133,7 +133,7 @@
         <h2>What You May Notice With FitCafe</h2>
 
         <div class="lifestyle-image-container">
-            <img src="assets/work-from-home.jpg?v=20260328" alt="Professional working from home with FitCafe coffee" class="lifestyle-image">
+            <img src="assets/work-from-home.jpg" alt="Professional working from home with FitCafe coffee" class="lifestyle-image">
         </div>
 
         <ul class="benefits-list">
@@ -194,9 +194,8 @@
         <h2>Get Your Free 5-Minute Morning Reset Guide</h2>
         <p class="optin-subtitle">Discover simple, science-backed strategies for supporting your metabolism, balancing energy, and reducing cravings — starting tomorrow morning.</p>
         
-        <form id="optin-form" class="optin-form" onsubmit="handleSubscribe(event)">
+        <form id="optin-form" class="optin-form">
             <input type="hidden" id="optin-list" value="ab51b15c-4ecb-417e-911c-9f49fe683578">
-            <input type="hidden" id="optin-nonce" value="">
             <input type="text" id="optin-name" placeholder="Your first name" required>
             <input type="email" id="optin-email" placeholder="Your best email" required>
             <button type="submit" class="cta-button">Send Me the Free Guide →</button>
@@ -241,25 +240,20 @@
     <script src="js/script.js"></script>
     <script>
     // Handle subscription - submit to Listmonk and redirect
-    function handleSubscribe(e) {
+    document.getElementById('optin-form').addEventListener('submit', function(e) {
         e.preventDefault();
         
         const name = document.getElementById('optin-name').value;
         const email = document.getElementById('optin-email').value;
         const listId = document.getElementById('optin-list').value;
         const button = e.target.querySelector('button[type="submit"]');
+        const originalText = button.textContent;
         
         // Show loading state
         button.textContent = 'Subscribing...';
         button.disabled = true;
         
-        // Create hidden iframe to submit form (avoids CORS issues)
-        const iframe = document.createElement('iframe');
-        iframe.name = 'listmonk-iframe';
-        iframe.style.display = 'none';
-        document.body.appendChild(iframe);
-        
-        // Submit to Listmonk via iframe
+        // Submit to Listmonk via fetch with no-cors
         fetch('https://listmonk.thequietself.com/subscription/form', {
             method: 'POST',
             mode: 'no-cors',
@@ -274,32 +268,19 @@
         })
         .then(function() {
             console.log('Subscription submitted');
+            // Redirect after 1 second
             setTimeout(function() {
-                document.body.removeChild(iframe);
                 window.location.href = 'https://fitcafecoffee.com?subscribed=true';
             }, 1000);
         })
         .catch(function(error) {
             console.log('Subscription submitted (or network error - redirecting anyway)');
-            setTimeout(function() {
-                document.body.removeChild(iframe);
-                window.location.href = 'https://fitcafecoffee.com?subscribed=true';
-            }, 1000);
-        });
-    }
-    </script>
-</body>
-</html>
-          window.location.href = 'https://fitcafecoffee.com?subscribed=true';
-            }, 1000);
-        })
-        .catch(function(error) {
-            console.log('Subscription submitted (or network error - redirecting anyway)');
+            // Even on error, redirect (no-cors may cause false errors)
             setTimeout(function() {
                 window.location.href = 'https://fitcafecoffee.com?subscribed=true';
             }, 1000);
         });
-    }
+    });
     </script>
 </body>
 </html>
