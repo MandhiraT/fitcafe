@@ -11,7 +11,12 @@ import base64
 import time
 
 # Configuration
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", "AIzaSyAfBpfztKZqV9_60IShYmomOtAmYCeiwIc")
+# IMPORTANT: Store API key in environment variable or .env file (NOT in code!)
+# export GOOGLE_API_KEY="your-api-key-here"
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+if not GOOGLE_API_KEY:
+    raise ValueError("GOOGLE_API_KEY not set. Please set environment variable.")
+
 # Use Nano Banana (Gemini 2.5 Flash Image) - supports generateContent
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent"
 
