@@ -241,6 +241,33 @@
     </footer>
 
     <script src="js/script.js"></script>
-    <script src="js/subscribe-handler.js"></script>
+    <script>
+    // Handle subscription redirect using iframe method
+    function handleSubscribe(e) {
+        e.preventDefault();
+        const form = e.target;
+        const button = form.querySelector('button[type="submit"]');
+        const originalText = button.textContent;
+        
+        // Show loading state
+        button.textContent = 'Subscribing...';
+        button.disabled = true;
+        
+        // Create hidden iframe
+        const iframe = document.createElement('iframe');
+        iframe.name = 'listmonk-iframe';
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+        
+        // Submit form to iframe
+        form.submit();
+        
+        // Redirect after 2 seconds (regardless of iframe response)
+        setTimeout(function() {
+            window.location.href = 'https://fitcafecoffee.com?subscribed=true';
+            document.body.removeChild(iframe);
+        }, 2000);
+    }
+    </script>
 </body>
 </html>
