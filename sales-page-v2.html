@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FitCafe - Premium wellness coffee that supports metabolism, curbs cravings, and provides clean energy. 180-day money-back guarantee.">
+    <title>FitCafe - Order Now | Premium Wellness Coffee</title>
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fitcafecoffee.com/">
+    <meta property="og:title" content="FitCafe - Order Now">
+    <meta property="og:description" content="Transform your morning coffee into a wellness ritual. Free shipping on qualifying orders.">
+    <meta property="og:image" content="https://fitcafecoffee.com/assets/hero-product-official.png">
+    
+    <link rel="stylesheet" href="css/style-modern.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Pricing Section Styles */
+        .pricing-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #FFF5F0 0%, #FFFFFF 100%);
+        }
+        
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .pricing-header h2 {
+            font-size: 2.5rem;
+            color: #1a202c;
+            margin-bottom: 15px;
+        }
+        
+        .pricing-header p {
+            font-size: 1.1rem;
+            color: #4a5568;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        
+        .pricing-card.popular {
+            border: 3px solid #C05621;
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.popular:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        .badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #C05621;
+            color: white;
+            padding: 8px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        
+        .badge-best {
+            background: #059669;
+        }
+        
+        .package-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .price-container {
+            text-align: center;
+            margin: 25px 0;
+        }
+        
+        .original-price {
+            font-size: 1.2rem;
+            color: #a0aec0;
+            text-decoration: line-through;
+            margin-bottom: 5px;
+        }
+        
+        .current-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #C05621;
+        }
+        
+        .price-per-bag {
+            font-size: 1rem;
+            color: #4a5568;
+            margin-top: 5px;
+        }
+        
+        .savings-badge {
+            background: #FED7D7;
+            color: #C53030;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 15px 0;
+        }
+        
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 25px 0;
+        }
+        
+        .features-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .check-icon {
+            color: #059669;
+            font-weight: bold;
+        }
+        
+        .add-to-cart-btn {
+            width: 100%;
+            background: #C05621;
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .add-to-cart-btn:hover {
+            background: #9C4215;
+        }
+        
+        .popular .add-to-cart-btn {
+            background: #C05621;
+        }
+        
+        .stock-status {
+            text-align: center;
+            color: #059669;
+            font-weight: 600;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .stock-dot {
+            width: 8px;
+            height: 8px;
+            background: #059669;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .payment-methods {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .payment-methods p {
+            color: #4a5568;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .payment-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .payment-icon {
+            height: 30px;
+            opacity: 0.7;
+        }
+        
+        .shipping-info {
+            background: #F0FFF4;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .shipping-info p {
+            color: #047857;
+            font-weight: 500;
+            margin: 0;
+        }
+        
+        /* Guarantee Section */
+        .guarantee-section {
+            padding: 60px 20px;
+            background: white;
+            text-align: center;
+        }
+        
+        .guarantee-badge {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, #C05621 0%, #9C4215 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 40px rgba(192, 86, 33, 0.3);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .pricing-header h2 {
+                font-size: 2rem;
+            }
+            
+            .pricing-card.popular {
+                transform: none;
+            }
+            
+            .pricing-card.popular:hover {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">FitCafe</a>
+            <ul class="nav-menu">
+                <li><a href="#pricing">Order Now</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#ingredients">Ingredients</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="container" style="padding: 60px 20px; text-align: center;">
+        <h1 style="font-size: 2.5rem; margin-bottom: 20px; color: #1a202c;">
+            Transform Your Morning Coffee Into a Wellness Ritual
+        </h1>
+        <p style="font-size: 1.2rem; color: #4a5568; max-width: 800px; margin: 0 auto 40px;">
+            FitCafe supports your metabolism, curbs cravings, and provides clean, sustained energy — all without changing your routine.
+        </p>
+        <img src="assets/hero-product-official.png" alt="FitCafe Premium Wellness Coffee" style="max-width: 400px; width: 100%;">
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section id="pricing" class="pricing-section">
+        <div class="pricing-header">
+            <h2>Choose Your Package</h2>
+            <p>Free shipping on qualifying orders • 180-day money-back guarantee</p>
+        </div>
+        
+        <div class="pricing-grid">
+            <!-- 1 Bag Package -->
+            <div class="pricing-card">
+                <div class="package-name">Starter Pack</div>
+                <div class="price-container">
+                    <div class="original-price">$49.00</div>
+                    <div class="current-price">$49</div>
+                    <div class="price-per-bag">$49.00 per bag</div>
+                </div>
+                <div style="text-align: center;">
+                    <span style="background: #E2E8F0; color: #4a5568; padding: 8px 20px; border-radius: 20px; font-weight: 600; display: inline-block;">30-Day Supply</span>
+                </div>
+                <ul class="features-list">
+                    <li><span class="check-icon">✓</span> 1 Bag of FitCafe</li>
+                    <li><span class="check-icon">✓</span> Supports Metabolism</li>
+                    <li><span class="check-icon">✓</span> Curbs Cravings</li>
+                    <li><span class="check-icon">✓</span> Clean Energy</li>
+                    <li><span class="check-icon">✓</span> 180-Day Guarantee</li>
+                </ul>
+                <button class="add-to-cart-btn" onclick="addToCart('1-bag', 49)">
+                    Add to Cart - $49
+                </button>
+                <div class="stock-status">
+                    <span class="stock-dot"></span>
+                    In Stock - Ships Today
+                </div>
+                <div class="shipping-info">
+                    <p>🚚 Free Shipping on orders $75+</p>
+                </div>
+            </div>
+            
+            <!-- 3 Bags Package (POPULAR) -->
+            <div class="pricing-card popular">
+                <div class="badge">Most Popular</div>
+                <div class="package-name">Wellness Pack</div>
+                <div class="price-container">
+                    <div class="original-price">$147.00</div>
+                    <div class="current-price">$117</div>
+                    <div class="price-per-bag">$39.00 per bag</div>
+                </div>
+                <div style="text-align: center;">
+                    <span class="savings-badge">Save 20%</span>
+                </div>
+                <div style="text-align: center; margin-bottom: 15px;">
+                    <span style="background: #FED7D7; color: #C53030; padding: 8px 20px; border-radius: 20px; font-weight: 600; display: inline-block;">90-Day Supply</span>
+                </div>
+                <ul class="features-list">
+                    <li><span class="check-icon">✓</span> 3 Bags of FitCafe</li>
+                    <li><span class="check-icon">✓</span> Supports Metabolism</li>
+                    <li><span class="check-icon">✓</span> Curbs Cravings</li>
+                    <li><span class="check-icon">✓</span> Clean Energy</li>
+                    <li><span class="check-icon">✓</span> 180-Day Guarantee</li>
+                    <li><span class="check-icon">✓</span> <strong>FREE Shipping</strong></li>
+                </ul>
+                <button class="add-to-cart-btn" onclick="addToCart('3-bags', 117)">
+                    Add to Cart - $117
+                </button>
+                <div class="stock-status">
+                    <span class="stock-dot"></span>
+                    In Stock - Ships Today
+                </div>
+                <div class="shipping-info">
+                    <p>🚚 FREE Shipping Included</p>
+                </div>
+            </div>
+            
+            <!-- 6 Bags Package (BEST VALUE) -->
+            <div class="pricing-card">
+                <div class="badge badge-best">Best Value</div>
+                <div class="package-name">Transformation Pack</div>
+                <div class="price-container">
+                    <div class="original-price">$294.00</div>
+                    <div class="current-price">$207</div>
+                    <div class="price-per-bag">$34.50 per bag</div>
+                </div>
+                <div style="text-align: center;">
+                    <span class="savings-badge" style="background: #C6F6D5; color: #276749;">Save 30%</span>
+                </div>
+                <div style="text-align: center; margin-bottom: 15px;">
+                    <span style="background: #F0FFF4; color: #047857; padding: 8px 20px; border-radius: 20px; font-weight: 600; display: inline-block;">180-Day Supply</span>
+                </div>
+                <ul class="features-list">
+                    <li><span class="check-icon">✓</span> 6 Bags of FitCafe</li>
+                    <li><span class="check-icon">✓</span> Supports Metabolism</li>
+                    <li><span class="check-icon">✓</span> Curbs Cravings</li>
+                    <li><span class="check-icon">✓</span> Clean Energy</li>
+                    <li><span class="check-icon">✓</span> 180-Day Guarantee</li>
+                    <li><span class="check-icon">✓</span> <strong>FREE Shipping</strong></li>
+                    <li><span class="check-icon">✓</span> <strong>Best Price Per Bag</strong></li>
+                </ul>
+                <button class="add-to-cart-btn" onclick="addToCart('6-bags', 207)">
+                    Add to Cart - $207
+                </button>
+                <div class="stock-status">
+                    <span class="stock-dot"></span>
+                    In Stock - Ships Today
+                </div>
+                <div class="shipping-info">
+                    <p>🚚 FREE Shipping Included</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Payment Methods -->
+        <div class="payment-methods" style="max-width: 1200px; margin: 60px auto 0;">
+            <p>🔒 Secure Checkout with</p>
+            <div class="payment-icons">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazon/amazon-original.svg" alt="Amazon Pay" style="height: 30px; width: auto;">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" alt="Apple Pay" style="height: 30px; width: auto;">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/paypal/paypal-original.svg" alt="PayPal" style="height: 30px; width: auto;">
+                <span style="height: 30px; display: flex; align-items: center; font-weight: 600; color: #1a202c;">VISA</span>
+                <span style="height: 30px; display: flex; align-items: center; font-weight: 600; color: #1a202c;">Mastercard</span>
+                <span style="height: 30px; display: flex; align-items: center; font-weight: 600; color: #1a202c;">AMEX</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- GUARANTEE SECTION -->
+    <section class="guarantee-section">
+        <div class="guarantee-badge">
+            180<br>Days
+        </div>
+        <h2 style="font-size: 2rem; margin-bottom: 20px; color: #1a202c;">
+            You've Nothing To Lose With Our 180-Day Money-Back Guarantee
+        </h2>
+        <p style="font-size: 1.1rem; color: #4a5568; max-width: 800px; margin: 0 auto 30px; line-height: 1.8;">
+            Our commitment to your satisfaction is unwavering. That's why we offer a generous 180-day money-back guarantee. If for any reason you're not completely satisfied with your purchase, simply return it for a full refund, no questions asked. We believe in the quality of our product and are confident that you'll love it. But if you don't, we'll make it right.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 40px;">
+            <div style="text-align: center;">
+                <div style="font-size: 2.5rem; margin-bottom: 10px;">📦</div>
+                <div style="font-weight: 600; color: #1a202c;">Free Returns</div>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 2.5rem; margin-bottom: 10px;">💰</div>
+                <div style="font-weight: 600; color: #1a202c;">Full Refund</div>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 2.5rem; margin-bottom: 10px;">✅</div>
+                <div style="font-weight: 600; color: #1a202c;">No Questions</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INGREDIENTS SECTION -->
+    <section id="ingredients" class="container" style="padding: 80px 20px;">
+        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: #1a202c;">
+            What's Inside — And Why We Chose It
+        </h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto;">
+            <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <h3 style="color: #C05621; margin-bottom: 15px;">☕ Green Coffee Bean Extract</h3>
+                <p style="color: #4a5568; line-height: 1.7;">Naturally sourced unroasted beans with chlorogenic acid that may help support healthy glucose metabolism and assist the body in utilizing stored energy.</p>
+            </div>
+            
+            <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <h3 style="color: #C05621; margin-bottom: 15px;">🍵 Green Tea Extract</h3>
+                <p style="color: #4a5568; line-height: 1.7;">Rich in antioxidants and naturally occurring compounds that may support metabolic function and provide gentle, sustained energy.</p>
+            </div>
+            
+            <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <h3 style="color: #C05621; margin-bottom: 15px;">🧘 L-Theanine</h3>
+                <p style="color: #4a5568; line-height: 1.7;">An amino acid that promotes relaxation without drowsiness, helping to smooth out the energy curve and reduce jitters.</p>
+            </div>
+            
+            <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <h3 style="color: #C05621; margin-bottom: 15px;">⚡ Chromium</h3>
+                <p style="color: #4a5568; line-height: 1.7;">An essential mineral that plays a key role in macronutrient metabolism and may help support healthy blood sugar levels.</p>
+            </div>
+            
+            <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <h3 style="color: #C05621; margin-bottom: 15px;">🔥 L-Carnitine</h3>
+                <p style="color: #4a5568; line-height: 1.7;">An amino acid derivative that helps transport fatty acids into cells to be used as energy, supporting natural fat metabolism.</p>
+            </div>
+            
+            <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <h3 style="color: #C05621; margin-bottom: 15px;">🌿 Garcinia Cambogia</h3>
+                <p style="color: #4a5568; line-height: 1.7;">A tropical fruit extract that has been traditionally used to support weight management and healthy appetite control.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section id="testimonials" class="container" style="padding: 80px 20px; background: #FFF5F0;">
+        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: #1a202c;">
+            What FitCafe Drinkers Are Saying
+        </h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto;">
+            <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <div style="color: #F6AD55; font-size: 1.5rem; margin-bottom: 15px;">★★★★★</div>
+                <p style="color: #4a5568; line-height: 1.7; font-style: italic; margin-bottom: 20px;">"I've tried everything for my afternoon energy crashes. FitCafe is the only thing that's kept me going without the jitters or crash. Three months in and I'm a loyal customer."</p>
+                <div style="font-weight: 600; color: #1a202c;">— Sarah M., Colorado</div>
+            </div>
+            
+            <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <div style="color: #F6AD55; font-size: 1.5rem; margin-bottom: 15px;">★★★★★</div>
+                <p style="color: #4a5568; line-height: 1.7; font-style: italic; margin-bottom: 20px;">"As a healthcare professional, I researched every ingredient before ordering. Transparent formulation, quality sourcing, certified manufacturing. That gave me confidence. I've been pleased with my experience."</p>
+                <div style="font-weight: 600; color: #1a202c;">— Dr. James K., RN</div>
+            </div>
+            
+            <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <div style="color: #F6AD55; font-size: 1.5rem; margin-bottom: 15px;">★★★★★</div>
+                <p style="color: #4a5568; line-height: 1.7; font-style: italic; margin-bottom: 20px;">"The cravings control is real. I used to hit the vending machine every day at 3pm. Now I make it to dinner without those intense sugar urges. Game changer for me."</p>
+                <div style="font-weight: 600; color: #1a202c;">— Mike T., Texas</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="background: #1a202c; color: white; padding: 40px 20px; text-align: center;">
+        <div class="container">
+            <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 20px;">FitCafe</div>
+            <p style="color: #a0aec0; font-size: 0.9rem; line-height: 1.7; max-width: 800px; margin: 0 auto 30px;">
+                These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Results may vary. Always consult with a healthcare professional before starting any new supplement regimen.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 30px;">
+                <a href="privacy.html" style="color: #a0aec0; text-decoration: none;">Privacy Policy</a>
+                <a href="terms.html" style="color: #a0aec0; text-decoration: none;">Terms of Service</a>
+                <a href="disclaimer.html" style="color: #a0aec0; text-decoration: none;">Disclaimer</a>
+                <a href="refund.html" style="color: #a0aec0; text-decoration: none;">Refund Policy</a>
+            </div>
+            <p style="color: #718096; font-size: 0.8rem; margin-top: 30px;">
+                © 2026 FitCafe. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Add to Cart Script -->
+    <script>
+        function addToCart(package, price) {
+            // For now, show alert (will be connected to checkout system)
+            alert(`✅ Added to Cart!\n\nPackage: ${package}\nPrice: $${price}\n\nCheckout system coming soon!`);
+            
+            // Track event (for analytics)
+            console.log('Add to Cart:', {
+                package: package,
+                price: price,
+                timestamp: new Date().toISOString()
+            });
+        }
+    </script>
+</body>
+</html>
